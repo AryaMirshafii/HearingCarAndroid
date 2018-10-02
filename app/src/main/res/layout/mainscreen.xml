@@ -16,9 +16,9 @@
         android:layout_width="70dp"
         android:layout_height="50dp"
 
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_marginBottom="200dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:text="RH"
@@ -31,9 +31,12 @@
         android:id="@+id/triggerLeftHornWarning"
         android:layout_width="70dp"
         android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+
+        android:layout_marginBottom="181dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-
         android:text="LH"
         android:textAllCaps="false"
         android:textColor="@color/steel_blue"
@@ -44,9 +47,9 @@
         android:layout_width="70dp"
         android:layout_height="50dp"
 
-        android:layout_alignEnd="@+id/triggerLeftHornWarning"
-        android:layout_alignRight="@+id/triggerLeftHornWarning"
-        android:layout_below="@+id/triggerLeftHornWarning"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="119dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:text="LS"
@@ -55,13 +58,27 @@
         android:textSize="25dp" />
 
     <Button
+        android:id="@+id/IncrementLeftCount"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+
+        android:layout_alignBottom="@+id/helpButton"
+        android:layout_alignParentStart="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:text="Inc L"
+        android:textAllCaps="false"
+        android:textColor="@color/steel_blue"
+        android:textSize="20dp" />
+
+    <Button
         android:id="@+id/triggerRightSirenWarning"
         android:layout_width="70dp"
         android:layout_height="50dp"
 
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/triggerRightHornWarning"
+        android:layout_below="@+id/triggerLeftHornWarning"
+        android:layout_marginTop="-181dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:text="RS"
@@ -70,133 +87,55 @@
         android:textColor="@color/steel_blue"
         android:textSize="25dp" />
 
-    <ImageView
-        android:id="@+id/leftArrow"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_alignLeft="@+id/rightArrow"
-        android:layout_alignStart="@+id/rightArrow"
-        android:layout_centerVertical="true"
-        app:srcCompat="@drawable/leftarrow" />
-
-    <ImageView
-        android:id="@+id/rightArrow"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_above="@+id/leftArrow"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="47dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp"
-        app:srcCompat="@drawable/rightarrow" />
-
-    <TextView
-        android:id="@+id/totalWarningEntry"
-        android:layout_width="220dp"
-        android:layout_height="65dp"
-        android:layout_alignLeft="@+id/totalWarnings2"
-        android:layout_alignStart="@+id/totalWarnings2"
-        android:layout_below="@+id/totalWarnings2"
-        android:fontFamily="@font/hkmediumlegacy"
-        android:gravity="center"
-        android:text="100"
-        android:textColor="@color/white"
-        android:textSize="60dp" />
-
-    <TextView
-        android:id="@+id/totalWarnings2"
-        android:layout_width="220dp"
-        android:layout_height="45dp"
-        android:layout_alignLeft="@+id/rightLabel2"
-        android:layout_alignStart="@+id/rightLabel2"
-        android:layout_below="@+id/rightLabel2"
-        android:layout_marginTop="96dp"
-        android:fontFamily="@font/hkmediumlegacy"
-        android:gravity="center"
-        android:text="Total warnings:"
-        android:textColor="@color/white"
-        android:textSize="30dp" />
-
-    <TextView
-        android:id="@+id/rightLabel2"
-        android:layout_width="220dp"
-        android:layout_height="45dp"
-        android:layout_alignLeft="@+id/leftLabel"
-        android:layout_alignStart="@+id/leftLabel"
-        android:layout_below="@+id/rightArrow"
-        android:fontFamily="@font/hkmediumlegacy"
-        android:gravity="center"
-        android:text="Lefthand warnings:"
-        android:textColor="@color/white"
-        android:textSize="24dp" />
-
-    <TextView
-        android:id="@+id/leftLabel"
-        android:layout_width="220dp"
-        android:layout_height="45dp"
-        android:layout_alignTop="@+id/rightArrow"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/hkmediumlegacy"
-        android:gravity="center"
-        android:text="Righthand warnings:"
-        android:textColor="@color/white"
-        android:textSize="24dp" />
-
     <TextView
         android:id="@+id/bluetoothLabel"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_above="@+id/leftLabel"
-        android:layout_marginBottom="11dp"
-        android:layout_toEndOf="@+id/triggerLeftSirenWarning"
-        android:layout_toRightOf="@+id/triggerLeftSirenWarning"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="180dp"
         android:fontFamily="@font/hkmediumlegacy"
         android:gravity="center"
         android:text="No Bluetooth Available"
         android:textColor="@color/white"
         android:textSize="24dp" />
 
+
+    <ImageButton
+        android:id="@+id/helpButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="35dp"
+        android:background="@color/clear"
+        app:srcCompat="@drawable/question" />
+
     <TextView
-        android:id="@+id/leftLabel2"
-        android:layout_width="220dp"
-        android:layout_height="45dp"
-        android:layout_alignTop="@+id/rightArrow"
-        android:layout_centerHorizontal="true"
+        android:id="@+id/mphLabel"
+        android:layout_width="400dp"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="68dp"
         android:fontFamily="@font/hkmediumlegacy"
         android:gravity="center"
-        android:text="Righthand warnings:"
+        android:text="75 MPH"
         android:textColor="@color/white"
-        android:textSize="24dp" />
+        android:textSize="75dp" />
 
     <TextView
-        android:id="@+id/leftWarningEntry"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-
-        android:layout_alignBaseline="@+id/rightLabel2"
-        android:layout_alignBottom="@+id/rightLabel2"
-        android:layout_alignLeft="@+id/rightWarningEntry"
-        android:layout_alignStart="@+id/rightWarningEntry"
-        android:fontFamily="@font/hkmediumlegacy"
-
-        android:text="100"
+        android:id="@+id/directionLabel"
+        android:layout_width="200dp"
+        android:layout_height="281dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:layout_marginBottom="120dp"
+        android:gravity="center"
+        android:text="N"
         android:textColor="@color/white"
-        android:textSize="27dp" />
+        android:textSize="240dp" />
 
-    <TextView
-        android:id="@+id/rightWarningEntry"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-
-        android:layout_alignBaseline="@+id/leftLabel"
-        android:layout_alignBottom="@+id/leftLabel"
-        android:layout_alignLeft="@+id/triggerRightSirenWarning"
-        android:layout_alignStart="@+id/triggerRightSirenWarning"
-        android:fontFamily="@font/hkmediumlegacy"
-
-        android:text="100"
-        android:textColor="@color/white"
-        android:textSize="27dp" />
 
 </RelativeLayout>

@@ -21,8 +21,7 @@ import android.widget.Button;
 
 
 public class warningScreen extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.warningscreen);
         Button continueButton = (Button) findViewById(R.id.continueButton);

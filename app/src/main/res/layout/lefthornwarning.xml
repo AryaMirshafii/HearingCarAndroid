@@ -11,9 +11,9 @@
     <TextView
         android:id="@+id/hornLabelLeft"
         android:layout_width="350dp"
-        android:layout_height="70dp"
-        android:text="Horn At Left"
-        android:textSize="50dp"
+        android:layout_height="120dp"
+        android:text="Horn"
+        android:textSize="100dp"
         android:textColor="@color/white"
         android:fontFamily="@font/hkmediumlegacy"
         android:layout_marginTop="30dp"

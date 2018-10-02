@@ -21,7 +21,9 @@ public class leftSirenWarning extends AppCompatActivity {
 
             public void onFinish() {
                 Intent myIntent = new Intent(leftSirenWarning.this, MainActivity.class);
+                //finish();
                 startActivity(myIntent);
+
             }
         }.start();
 

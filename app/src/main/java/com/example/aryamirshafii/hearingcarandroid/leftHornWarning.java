@@ -23,7 +23,9 @@ public class leftHornWarning extends AppCompatActivity {
 
             public void onFinish() {
                 Intent myIntent = new Intent(leftHornWarning.this, MainActivity.class);
+                //finish();
                 startActivity(myIntent);
+
             }
         }.start();
 

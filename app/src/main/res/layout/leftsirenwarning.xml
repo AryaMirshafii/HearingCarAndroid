@@ -11,14 +11,14 @@
     <TextView
         android:id="@+id/sirenLabelLeft"
         android:layout_width="350dp"
-        android:layout_height="70dp"
+        android:layout_height="120dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/hkmediumlegacy"
-        android:text="Siren At Left"
+        android:text="Siren"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="50dp" />
+        android:textSize="100dp" />
 
     <ImageView
         android:layout_width="300dp"
