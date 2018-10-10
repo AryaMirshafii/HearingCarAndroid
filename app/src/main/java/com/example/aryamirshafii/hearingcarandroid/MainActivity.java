@@ -194,14 +194,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /**
+
         leftButton.setVisibility(View.INVISIBLE);
         leftButton2.setVisibility(View.INVISIBLE);
         rightButton.setVisibility(View.INVISIBLE);
         rightButton2.setVisibility(View.INVISIBLE);
         leftIncrement.setVisibility(View.INVISIBLE);
 
-         */
+
 
 
 
