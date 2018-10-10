@@ -21,10 +21,16 @@ import android.widget.Button;
 
 
 public class warningScreen extends AppCompatActivity {
+
+    private dataManager dataController;
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.warningscreen);
+
+        dataController = new dataManager(getApplicationContext());
+
         Button continueButton = (Button) findViewById(R.id.continueButton);
+
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,4 +40,15 @@ public class warningScreen extends AppCompatActivity {
         });
 
     }
+
+
+
+
+
+
+
+
+
+
+
 }

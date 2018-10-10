@@ -13,6 +13,8 @@ public class dataManager {
 
     private String rightWarningFileName = "rightWarnings.txt";
 
+    private String userSettingsFileName = "themeSettings.txt";
+
 
 
 
@@ -21,8 +23,49 @@ public class dataManager {
     public  dataManager(Context context){
         this.context = context;
 
+    }
+
+
+    public void setTheme(String themeName){
+
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = context.openFileOutput(userSettingsFileName , Context.MODE_PRIVATE);
+            outputStream.write(themeName.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public String getTheme(){
+        FileInputStream fis;
+        int n;
+        try {
+            fis = context.openFileInput(userSettingsFileName);
+            StringBuffer fileContent = new StringBuffer("");
+
+            byte[] buffer = new byte[1024];
+
+
+
+            while ((n = fis.read(buffer)) != -1) {
+                fileContent.append(new String(buffer, 0, n));
+            }
+
+            return fileContent.toString();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "default";
 
     }
+
+
 
 
     public void incrementLeftWarnings(){

@@ -5,8 +5,16 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/darkblue"
+
     android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/backgroundImageViewLS"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+
+        app:srcCompat="@drawable/backgroundimage" />
 
     <TextView
         android:id="@+id/sirenLabelLeft"
@@ -21,12 +29,15 @@
         android:textSize="100dp" />
 
     <ImageView
+        android:id="@+id/arrowImageLS"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_below="@+id/sirenLabelLeft"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:background="@drawable/whitearrowleft" />
+        app:srcCompat="@drawable/leftarrowwhite" />
+
+
 
 
 </RelativeLayout>

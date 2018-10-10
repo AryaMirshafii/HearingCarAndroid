@@ -1,4 +1,5 @@
 package com.example.aryamirshafii.hearingcarandroid;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -10,9 +11,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.ParcelUuid;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +24,7 @@ import android.view.View;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,11 +33,18 @@ import java.util.UUID;
 import android.widget.Button;
 
 import com.budiyev.android.circularprogressbar.CircularProgressBar;
+import com.polidea.rxandroidble2.RxBleClient;
+import com.polidea.rxandroidble2.RxBleConnection;
+import com.polidea.rxandroidble2.RxBleDevice;
+import com.polidea.rxandroidble2.scan.ScanSettings;
+
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
 
 public class MainActivity extends AppCompatActivity {
 
 
-    private BluetoothController myBluetooth;
+
     private dataManager dataController;
 
 
@@ -43,26 +54,60 @@ public class MainActivity extends AppCompatActivity {
     private TextView  bluetoothStatusLabel;
 
 
+    /** BLUETOOTH DECLERATIONS BEGIN HERE
+     *
+     */
     private BluetoothDevice hearingBluetooth;
 
+    private RxBleClient rxBleClient;
+    private Context context;
 
+    private UUID uuid;
+
+    private String packetString;
+    private String address = "C8:DF:84:2A:56:13";
+    private final String deviceName = "NileReverb "; // Name has a space at the end due to weird  behavior from AT commands
+
+    private RxBleDevice device;
+
+
+
+
+    private RxBleConnection bleConnection;
+    private io.reactivex.Observable<RxBleConnection> connectionObservable;
+    private PublishSubject<Boolean> disconnectTriggerSubject = PublishSubject.create();
+
+    private boolean deviceExists = false;
+
+
+    private Disposable scanSubscription;
+
+
+    private Disposable connectionDisposable;
+
+
+    private ImageView backgroundImage;
+
+
+    private ImageButton helpButton;
+    private  ImageButton settingsButton;
+    private TextView mphLabel;
+    private TextView directionLabel;
 
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.mainscreen);
         dataController = new dataManager(this.getApplicationContext());
 
 
         bluetoothStatusLabel = (TextView) findViewById(R.id.bluetoothLabel);
-
-
+        mphLabel = (TextView)  findViewById(R.id.mphLabel);
+        directionLabel = (TextView)  findViewById(R.id.directionLabel);
+        backgroundImage = (ImageView) findViewById(R.id.backgroundImageView);
 
         configureButtons();
-
-
-        //TODO Uncomment
-        //myBluetooth = new BluetoothController(getApplicationContext(), bluetoothStatusLabel);
 
 
 
@@ -70,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
 
 
@@ -128,11 +175,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        ImageButton helpButton = (ImageButton) findViewById(R.id.helpButton);
+        helpButton = (ImageButton) findViewById(R.id.helpButton);
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, helpScreen.class);
+                startActivity(myIntent);
+            }
+        });
+
+
+        settingsButton = (ImageButton) findViewById(R.id.settingButton);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, SettingScreen.class);
                 startActivity(myIntent);
             }
         });
@@ -143,8 +200,12 @@ public class MainActivity extends AppCompatActivity {
         rightButton.setVisibility(View.INVISIBLE);
         rightButton2.setVisibility(View.INVISIBLE);
         leftIncrement.setVisibility(View.INVISIBLE);
-        helpButton.setVisibility(View.INVISIBLE);
+
          */
+
+
+
+
     }
 
 
@@ -202,9 +263,57 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public void onResume() {
+
+        checkTheme();
         super.onResume();
 
     }
+
+
+
+
+
+    private void checkTheme(){
+        String theme = dataController.getTheme();
+        if(theme == null || theme == ""){
+            return;
+        }
+
+        if(theme.equals("dark")){
+            setColors(getResources().getColor(R.color.darkModeOrange));
+
+        }else{
+            setColors(getResources().getColor(R.color.white));
+        }
+    }
+
+
+    private void setColors(int color){
+        if(color == getResources().getColor(R.color.darkModeOrange)){
+            helpButton.setImageDrawable(getResources().getDrawable(R.drawable.orangequestionmark));
+            settingsButton.setImageDrawable(getResources().getDrawable(R.drawable.darkmodesettingbutton));
+            backgroundImage.setImageDrawable(getResources().getDrawable(R.drawable.blackbackground));
+        }else if(color == getResources().getColor(R.color.white)){
+            helpButton.setImageDrawable(getResources().getDrawable(R.drawable.whitequestionmark));
+            settingsButton.setImageDrawable(getResources().getDrawable(R.drawable.settings));
+            backgroundImage.setImageDrawable(getResources().getDrawable(R.drawable.backgroundimage));
+
+        }
+
+        bluetoothStatusLabel.setTextColor(color);
+        mphLabel.setTextColor(color);
+        directionLabel.setTextColor(color);
+
+
+    }
+
+
+
+
+
+
+
+
 
     private void checkWeek(){
         Calendar cal = Calendar.getInstance();
@@ -221,5 +330,198 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    /** Bluetooth Methods start here*********
+     *
+     *
+     *
+     *
+     *
+     */
+
+
+
+    private void startBluetooth(){
+        this.context = getApplicationContext();
+        this.rxBleClient = RxBleClient.create(context);
+
+
+
+
+
+        uuid =  UUID.fromString("0000FFE1-0000-1000-8000-00805F9B34FB");
+
+        packetString = "";
+        //device = rxBleClient.getBleDevice(address);
+        scan();
+
+    }
+
+
+
+
+
+
+    private void scan(){
+
+        System.out.println("Starting to scan");
+
+
+
+
+        scanSubscription = rxBleClient.scanBleDevices(
+                new ScanSettings.Builder()
+                        //.setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
+                        .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES)
+                        .build()
+
+
+        )
+                .subscribe(
+                        scanResult -> {
+
+                            //System.out.println("THe device name is:" + scanResult.getBleDevice().getName()  + ":");
+                            if(scanResult.getBleDevice().getName() != null && scanResult.getBleDevice().getName().equals(deviceName)){
+
+                                device = scanResult.getBleDevice();
+                                System.out.println("Found device!");
+                                bluetoothStatusLabel.setText("Connected To Device");
+                                deviceExists = true;
+                                scanAndConnect();
+
+
+                            }else {
+                                bluetoothStatusLabel.setText("Device Not Connected");
+                            }
+
+
+                        },
+                        throwable -> {
+                            System.out.println("An error occured while trying to scan for devices");
+                            throwable.printStackTrace();
+                        }
+                );
+
+        //scanSubscription.dispose();
+    }
+
+
+
+    private void scanAndConnect(){
+        scanSubscription.dispose();
+        System.out.println("Scanning and connecting");
+        connectionObservable = prepareConnectionObservable();
+        connect();
+    }
+
+
+
+    private io.reactivex.Observable<RxBleConnection> prepareConnectionObservable() {
+        return device
+                .establishConnection(false);
+    }
+
+
+    private boolean isConnected() {
+        return device.getConnectionState() == RxBleConnection.RxBleConnectionState.CONNECTED;
+    }
+
+
+    @SuppressLint("CheckResult")
+    private void connect(){
+
+        if (isConnected()) {
+            triggerDisconnect();
+        } else {
+            connectionDisposable = device.establishConnection(false)
+
+                    .doFinally(this::dispose)
+                    .subscribe(this::onConnectionReceived, this::onConnectionFailure);
+        }
+
+
+
+
+
+    }
+
+
+
+    @SuppressLint("CheckResult")
+    public void read(){
+        if (isConnected()) {
+
+
+            bleConnection.setupNotification(uuid)
+                    .doOnNext(notificationObservable -> {
+
+                    })
+                    .flatMap(notificationObservable -> notificationObservable) // <-- Notification has been set up, now observe value changes.
+                    .subscribe(
+                            bytes -> {
+                                //System.out.println("Recieving data");
+                                String encodedString = new String(bytes, StandardCharsets.UTF_8);
+                                //encodedString = trimString(encodedString);
+
+
+                                if(!encodedString.equals("")){
+
+                                    System.out.println("The current read value is " + encodedString.trim());
+                                    System.out.println("Executing command.....");
+
+
+                                }
+
+
+
+                            },
+                            throwable -> {
+                                System.out.println("An error occured");
+                                throwable.printStackTrace();
+
+                            }
+                    );
+
+        }else {
+            connect();
+            System.out.println("I am not connected to deviec in reading");
+        }
+
+
+
+    }
+
+
+
+
+    private void onConnectionFailure(Throwable throwable) {
+        //noinspection ConstantConditions
+        System.out.println("An error occured while connecting");
+        //System.out.println(throwable.));
+        //bluetoothLabel.setText("Device Not Connected");
+        throwable.printStackTrace();
+        connect();
+    }
+
+
+    private void triggerDisconnect() {
+        disconnectTriggerSubject.onNext(true);
+    }
+
+
+    private void dispose() {
+        connectionDisposable = null;
+
+    }
+
+
+    private void onConnectionReceived(RxBleConnection connection) {
+
+        System.out.println("A connection has occurred");
+        bleConnection = connection;
+        read();
+
+
+    }
 
 }

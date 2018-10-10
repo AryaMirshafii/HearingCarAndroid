@@ -101,17 +101,7 @@ public class BluetoothController {
             System.out.println("The device does not exist");
         }
 
-        if(!checkBothDevices()){
-            System.out.println("The BT SPeaker is not connected");
-            String popupMessage = "Please pair your device with the Nile Reverb's Speaker";
 
-        }else {
-            System.out.println("The BT SPeaker is connected");
-            System.out.println("Create bond is " + audioBluetooth.createBond());
-
-
-
-        }
 
 
 
@@ -123,23 +113,7 @@ public class BluetoothController {
 
 
 
-    private boolean checkBothDevices(){
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
 
-        //List<String> bluetoothList = new ArrayList<>();
-        for(BluetoothDevice btDevice : pairedDevices){
-
-            if(btDevice.getName().equals("BT Speaker")){
-                audioBluetooth = btDevice;
-                return true;
-            }
-
-        }
-
-        return false;
-
-    }
 
 
 
@@ -245,7 +219,7 @@ public class BluetoothController {
 
                                     System.out.println("The current read value is " + encodedString.trim());
                                     System.out.println("Executing command.....");
-                                    //ensurePacket(encodedString);
+
 
                                 }
 
@@ -300,155 +274,6 @@ public class BluetoothController {
 
 
 
-
-    @SuppressLint("CheckResult")
-    public void write(String message){
-        message = message.replace("\n","");
-        System.out.println("Writing " + message);
-        if(message.equals("")){
-            read();
-            return;
-        }
-
-        if(message.charAt(0) != '_'){
-            message = "_" + message;
-        }
-
-        if(message.charAt(message.length() -1) != '_'){
-            message += '_';
-        }
-        byte[] byteArray = message.getBytes();
-        System.out.println("ByteArray size is + " + byteArray.length);
-
-        if (isConnected() && !connectionDisposable.isDisposed()) {
-            if(longWriteConnection == null){
-
-                longWriteConnection =
-                       bleConnection.createNewLongWriteBuilder()
-                               .setCharacteristicUuid(uuid);
-            }
-
-            longWriteConnection
-                    .setBytes(byteArray)
-                    //.setMaxBatchSize(20) // optional -> default 20 or current MTU
-
-                    .build()
-                    .subscribe();
-
-
-
-
-            read();
-
-        }else {
-            connect();
-            System.out.println("Tried to write but could not connect");
-        }
-    }
-
-
-
-
-
-
-
-    /**
-     * A function that ensures that the data recieved from bluetooth is complete
-     * I.E starts and ends with "_" in order to ensure a complete string of data.
-     * //@param commandString
-
-    private void ensurePacket(String commandString){
-
-        System.out.println("command string is:" + commandString + ":");
-
-        if(previousPacketString.equals(commandString)){
-
-            System.out.println("Duplicate command strings detected. Returning");
-            return;
-        }
-
-        if(packetString != null && packetString.length() > 4 && packetString.indexOf("_", 1) > 0){
-            System.out.println("Duplicate underscores detected");
-            int secondUnderscoreIndex = packetString.indexOf("_", 1);
-            packetString = packetString.substring(0, secondUnderscoreIndex + 1);
-
-
-        }
-
-
-
-
-        previousPacketString = commandString;
-
-        if(commandString.startsWith("_") && commandString.endsWith("_") && commandString.length() > 3){
-            //Case 1 complete packet with front and end "_"
-            System.out.println("Case 1");
-
-            write(doCommand(commandString));
-
-        }else if(commandString.startsWith("_") && !commandString.endsWith("_")){
-            //Case 2 complete packet with front of "_"
-            packetString = commandString;
-            System.out.println("Case 2"+ packetString);
-        }else if(commandString.endsWith("_") && !commandString.startsWith("_")){
-            //Case 2 complete packet with end of "_"
-            System.out.println("Case 3");
-            packetString += commandString;
-            packetString = packetString.replace("_","");
-            write(doCommand(packetString));
-
-            packetString = "";
-
-        }else{
-            System.out.println("Case 4");
-            packetString += commandString;
-            if(isValidCommand(packetString)){
-                write(doCommand(packetString));
-            }
-        }
-
-        System.out.println("Current packet is :" + packetString + ":");
-    }
-    */
-
-    private void trimEnd(String toTrim){
-
-    }
-    private boolean isValidCommand(String command){
-        if(command.length() < 3){
-            return false;
-        }
-
-        System.out.println("The char at index 1 is :" + command.charAt(0));
-        System.out.println("The char at end  is :" + command.charAt(command.length() -1));
-        return command.startsWith("_") && command.endsWith("_");
-    }
-
-
-
-
-
-    private void onReadFailure(Throwable throwable) {
-        //noinspection ConstantConditions
-        System.out.println("An error occured while reading");
-        System.out.println(throwable.getCause());
-        throwable.printStackTrace();
-
-    }
-
-
-    private void onWriteFailure(Throwable throwable) {
-        //noinspection ConstantConditions
-        System.out.println("An error occured while writing");
-        System.out.println(throwable.getCause());
-        throwable.printStackTrace();
-    }
-
-    private void onWriteSuccess() {
-        //noinspection ConstantConditions
-        System.out.println("the write was sucessful");
-    }
-
     private void onConnectionFailure(Throwable throwable) {
         //noinspection ConstantConditions
         System.out.println("An error occured while connecting");
@@ -478,18 +303,6 @@ public class BluetoothController {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -6,8 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/skillScreen"
-    android:background="@drawable/warning"
+
     >
+
+
+    <ImageView
+        android:id="@+id/backgroundImageViewLH"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+
+        app:srcCompat="@drawable/backgroundimage" />
     <TextView
         android:id="@+id/hornLabelLeft"
         android:layout_width="350dp"
@@ -20,14 +29,15 @@
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         />
+
     <ImageView
+        android:id="@+id/arrowImageLH"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/hornLabelLeft"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/whitearrowleft"
-        />
+        android:layout_marginBottom="65dp"
+        app:srcCompat="@drawable/leftarrowwhite" />
 
 
 

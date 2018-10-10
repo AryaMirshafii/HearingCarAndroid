@@ -6,11 +6,19 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/warning"
+
     android:orientation="vertical">
 
+    <ImageView
+        android:id="@+id/backgroundImageViewRH"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+
+        app:srcCompat="@drawable/backgroundimage" />
+
     <TextView
-        android:id="@+id/hornLabel"
+        android:id="@+id/hornLabelRight"
         android:layout_width="350dp"
         android:layout_height="120dp"
         android:layout_centerHorizontal="true"
@@ -22,12 +30,15 @@
         android:textSize="100dp" />
 
     <ImageView
+        android:id="@+id/arrowImageRH"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_below="@+id/hornLabel"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/whitearrowright" />
+        android:layout_marginBottom="65dp"
+        app:srcCompat="@drawable/rightarrowwhite"/>
+
+
 
 
 </RelativeLayout>

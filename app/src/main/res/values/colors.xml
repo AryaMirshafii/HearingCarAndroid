@@ -149,5 +149,6 @@
     <color name="internshipColor"> 	#2F52D2</color>
     <color name="skillColor"> 	#C7970F</color>
     <color name="courseColor"> 	#A44A6D</color>
+    <color name="darkModeOrange"> 	#F0751D</color>
     <color name="extracurricularColor"> 	#229015</color>
 </resources>
