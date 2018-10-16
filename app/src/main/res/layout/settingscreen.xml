@@ -12,8 +12,10 @@
         android:id="@+id/backgroundImageView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:scaleType="fitXY"
 
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY"
         app:srcCompat="@drawable/backgroundimage" />
     <ImageButton
         android:id="@+id/closeButton"
@@ -42,12 +44,12 @@
         android:id="@+id/theme2"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_alignEnd="@+id/fontHeader"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="170dp"
-        android:fontFamily="@font/hkbold"
-        android:text="Theme 2"
 
+
+        android:layout_below="@+id/theme1Switch"
+        android:layout_marginTop="27dp"
+        android:fontFamily="@font/hkbold"
+        android:text="Colorblind Mode"
         android:textColor="@color/white"
         android:textSize="24dp" />
 
@@ -57,11 +59,10 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignEnd="@+id/fontHeader"
-
-        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:layout_marginTop="243dp"
         android:fontFamily="@font/hkbold"
-        android:text="Theme 3"
+        android:text="Night Mode"
         android:textColor="@color/white"
         android:textSize="24dp" />
 
@@ -80,6 +81,34 @@
         android:textSize="24dp"
 
         />
+
+    <TextView
+
+        android:id="@+id/theme4"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_above="@+id/closeButton"
+        android:layout_alignStart="@+id/theme1"
+        android:layout_marginBottom="23dp"
+        android:fontFamily="@font/hkbold"
+        android:layout_alignParentStart="true"
+        android:text="Tropical Theme"
+        android:textColor="@color/white"
+        android:textSize="24dp" />
+
+    <TextView
+
+        android:id="@+id/theme5"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/theme2"
+        android:layout_below="@+id/theme3"
+        android:layout_marginTop="39dp"
+        android:fontFamily="@font/hkbold"
+        android:text="Rustic Theme"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/white"
+        android:textSize="24dp" />
 
     <Switch
         android:id="@+id/theme1Switch"
@@ -106,6 +135,26 @@
         android:layout_height="30dp"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/theme3"
+        android:layout_marginEnd="26dp"
+        android:gravity="center"
+        android:theme="@style/SwitchTheme"/>
+
+    <Switch
+        android:id="@+id/theme4Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/theme4"
+        android:layout_marginEnd="26dp"
+        android:gravity="center"
+        android:theme="@style/SwitchTheme"/>
+
+    <Switch
+        android:id="@+id/theme5Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/theme5"
         android:layout_marginEnd="26dp"
         android:gravity="center"
         android:theme="@style/SwitchTheme"/>
