@@ -282,6 +282,18 @@ public class MainActivity extends AppCompatActivity {
         if(theme.equals("dark")){
             setColors(getResources().getColor(R.color.darkModeOrange));
 
+        }else if(theme.equals("colorblind")){
+            setColors(getResources().getColor(R.color.gray2));
+
+        }else if(theme.equals("rustic")){
+            setColors(getResources().getColor(R.color.rustic_green));
+
+        }else if(theme.equals("tropical")){
+            setColors(getResources().getColor(R.color.tropical_orange));
+
+        }else if(theme.equals("night")){
+            setColors(getResources().getColor(R.color.night_purple));
+
         }else{
             setColors(getResources().getColor(R.color.white));
         }
@@ -293,6 +305,26 @@ public class MainActivity extends AppCompatActivity {
             helpButton.setImageDrawable(getResources().getDrawable(R.drawable.orangequestionmark));
             settingsButton.setImageDrawable(getResources().getDrawable(R.drawable.darkmodesettingbutton));
             backgroundImage.setImageDrawable(getResources().getDrawable(R.drawable.blackbackground));
+        }else if(color == getResources().getColor(R.color.gray2)){
+            helpButton.setImageDrawable(getResources().getDrawable(R.drawable.whitequestionmark));
+            settingsButton.setImageDrawable(getResources().getDrawable(R.drawable.settings));
+            backgroundImage.setImageDrawable(getResources().getDrawable(R.drawable.blackbackground));
+
+        }else if(color == getResources().getColor(R.color.night_purple)){
+            helpButton.setImageDrawable(getResources().getDrawable(R.drawable.whitequestionmark));
+            settingsButton.setImageDrawable(getResources().getDrawable(R.drawable.settings));
+            backgroundImage.setImageDrawable(getResources().getDrawable(R.drawable.blackbackground));
+
+        }else if(color == getResources().getColor(R.color.tropical_orange)){
+            helpButton.setImageDrawable(getResources().getDrawable(R.drawable.whitequestionmark));
+            settingsButton.setImageDrawable(getResources().getDrawable(R.drawable.settings));
+            backgroundImage.setImageDrawable(getResources().getDrawable(R.color.tropical_aqua));
+
+        }else if(color == getResources().getColor(R.color.rustic_green)){
+            helpButton.setImageDrawable(getResources().getDrawable(R.drawable.whitequestionmark));
+            settingsButton.setImageDrawable(getResources().getDrawable(R.drawable.settings));
+            backgroundImage.setImageDrawable(getResources().getDrawable(R.color.rustic_gray));
+
         }else if(color == getResources().getColor(R.color.white)){
             helpButton.setImageDrawable(getResources().getDrawable(R.drawable.whitequestionmark));
             settingsButton.setImageDrawable(getResources().getDrawable(R.drawable.settings));
