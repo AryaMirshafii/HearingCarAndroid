@@ -151,4 +151,32 @@
     <color name="courseColor"> 	#A44A6D</color>
     <color name="darkModeOrange"> 	#F0751D</color>
     <color name="extracurricularColor"> 	#229015</color>
+
+    <!--colorblind theme -->
+    <color name="gray1"> 	#e0e0e0</color>
+    <color name="gray2"> 	#aeaeae</color>
+    <color name="gray3"> 	#6e6e6e</color>
+    <color name="gray4"> 	#e8e8e8</color>
+
+    <!--night theme -->
+    <color name="night_purple"> 	#351c5f</color>
+    <color name="night_brown"> 	#362920</color>
+    <color name="night_gray"> 	#2c2c1d</color>
+    <color name="night_blue"> 	#0a2966</color>
+    <color name="night_dark_blue"> 	#142114</color>
+
+    <!--rustic theme -->
+    <color name="rustic_black"> 	#110f0f</color>
+    <color name="rustic_gray"> 	#7e7a7a</color>
+    <color name="rustic_red"> 	#671b1b</color>
+    <color name="rustic_green"> 	#224730</color>
+    <color name="rustic_brown"> 	#585341</color>
+
+    <!--Tropical theme -->
+    <color name="tropical_blue">     #109e9a</color>
+    <color name="tropical_orange">  #ffbf42</color>
+    <color name="tropical_green">   #b7ff73</color>
+    <color name="tropical_aqua">     #1b687e</color>
+    <color name="tropical_pink">     #ff9a9a</color>
+
 </resources>
