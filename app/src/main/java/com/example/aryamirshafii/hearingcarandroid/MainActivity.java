@@ -211,11 +211,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void notifyUser(String data) {
+    private void notifyUser(char data) {
         bluetoothStatusLabel.setText("Connected to HearingCar");
 
         System.out.println("this is being called " + data);
-        if (data.equals("1")) {
+        if (data.equals('1')) {
             // Left horn
             System.out.println("left horn started");
             Intent myIntent = new Intent(MainActivity.this, leftHornWarning.class);
@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        } else if(data.equals("2")) {
+        } else if(data.equals('2')) {
             //Left siren
             System.out.println("left siren started");
             Intent myIntent = new Intent(MainActivity.this, leftSirenWarning.class);
@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(myIntent);
 
 
-        } else if (data.equals("3")) {
+        } else if (data.equals('3')) {
 
             //right siren
             System.out.println("right siren started");
@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        } else if(data.equals("4")) {
+        } else if(data.equals('4')) {
             // Right horn
             System.out.println("right horn started");
             Intent myIntent = new Intent(MainActivity.this, rightHornWarning.class);
@@ -460,15 +460,15 @@ public class MainActivity extends AppCompatActivity {
                     .subscribe(
                             bytes -> {
                                 //System.out.println("Recieving data");
-                                String encodedString = new String(bytes, StandardCharsets.UTF_8);
+                                char encodedChar = (char) bytes;
                                 //encodedString = trimString(encodedString);
 
 
-                                if(!encodedString.equals("")){
+                                if(!encodedChar.equals('')){
 
-                                    System.out.println("The current read value is " + encodedString.trim());
+                                    System.out.println("The current read value is " + encodedChar);
                                     System.out.println("Executing command.....");
-
+                                    notifyUser(encodedChar);
 
                                 }
 
