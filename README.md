@@ -2,86 +2,23 @@
 
 As a part of the Georgia Tech Engineering For Social Innovation group, my team and I sought to create a device for the hearing impaired. Driving requires us to use all of our senses, not just our vision, and because of this, those with hearing disabilities are unable to experience the enjoyment and convenience of driving as safely as others. Our system seeks to display visually the vital aural information from the surroundings so those with hearing disabilities can drive safer than before. For this project, we partnered with the Idaho School for the Deaf and Blind.
 
-## Getting Started
+## Our Partner
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+The Idaho School for the Deaf and the Blind fosters a continuum of services for people of all ages with hearing or vision loss, including those with other disabilities including deafness and blindness, in the State of Idaho. The Idaho School for the Deaf and the Blind is the center of educational expertise for these children, their families, and local education providers.
+
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Our mobile Application is written for the Android operating system using Java. Upon starting the app, the user is prompted to accept a warning about the dangers of distracted driving. Upon accepting, the user is then taken to the main screen . This screen provides him or her a plethora of information. The circular battery indicator shows the user how much battery power remains in the HearingCar device as both a percent and a visual fraction. The main screen also displays the number of left, right, and total warnings so that the user can gauge and adapt his or her driving. Upon receiving a number ranging from 0 to 4 from the circuit, the app will display a the corresponding warning screen for six seconds. In typical usage, the user's phone would be mounted to his or her car's dashboard in order to ensure maximum visibility.
 
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
+* [Java](https://www.java.com/en/) - The programming language of choice
+* [Android Studio](https://developer.android.com/studio) - The web framework used
+* [Gradle](https://gradle.org/) - Used to build the application
+* [Rxandroidble2](https://github.com/Polidea/RxAndroidBle) - The library used to connect to BLE devices
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
