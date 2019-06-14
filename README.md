@@ -16,7 +16,7 @@ Our mobile Application is written for the Android operating system using Java. U
 * [Java](https://www.java.com/en/) - The programming language of choice
 * [Android Studio](https://developer.android.com/studio) - The IDE of choice
 * [Gradle](https://gradle.org/) - Used to build the application
-* [Rxandroidble2](https://github.com/Polidea/RxAndroidBle) - The library used to connect to BLE devices
+* [Google Drive API](https://developers.google.com/drive/) - Used to upload resume to Google Drive.
 
 
 ## License
